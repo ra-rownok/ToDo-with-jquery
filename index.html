@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="input">
+            <input type="text" class="form-control" placeholder="New Task">
+            <div class="add">
+                <i class="material-icons">add</i>
+            </div>
+        </div>
+    
+        <ul class="todo-list">
+    
+        </ul>
+     </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $ (function() {
+        var count=0;
+        $(".add").click(function() {
+            var input = $(".form-control").val();
+            if (input!='') {
+                $(".todo-list").append('<li> <div class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" id="customCheck '+count+' "> <label class="custom-control-label" for="customCheck '+count+' "></label><span>'+input+'</span></div><span class="remove"><i class="material-icons">delete</i></span> </li>');
+                count++;
+            }
+            $(".form-control").val('');
+        })
+
+        $(document).on('change', 'input[type="checkbox"]', function() {
+            if ($(this).is(':checked')) {
+                $(this).closest("li").children(".remove").addClass("active");
+            } else {
+                $(this).closest("li").children(".remove").removeClass("active");
+            }
+        })
+
+        $(document).on('click', '.remove', function() {
+            $(this).parent().remove();
+        })
+    })
+</script>
+</html>
